@@ -1,6 +1,6 @@
 {
-  "name": "Carbon Recur",
-  "description": "This is a take on the node-date-recur library from Andrew Chilton and moment-recur library ported to PHP and uses Carbon",
+  "name": "phxis/carbon-recur",
+  "description": "This is a take on the node-date-recur library from Andrew Chilton ported to PHP and uses Carbon",
   "require": {
     "php": ">=5.3.0",
     "nesbot/carbon": "~1.17"
