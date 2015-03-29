@@ -39,7 +39,7 @@ class Calendar {
   ];
 
   // Private function for cehcking the range of calendar values
-  private function checkRange($low, $high, $list) {
+  private static function checkRange($low, $high, $list) {
     foreach ( $list as $v ) {
       if ( $v < $low || $v > $high ) {
         throw new InvalidArgumentException('Value should be in range ' . $low . ' to ' . $high);
@@ -48,7 +48,7 @@ class Calendar {
   }
 
   // Private function to convert day and month names to numbers
-  private function namesToNumbers($list, $nameType) {
+  private static function namesToNumbers($list, $nameType) {
       // var unit, unitInt, unitNum;
       $newList = [];
 
