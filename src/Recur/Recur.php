@@ -400,8 +400,8 @@ class Recur {
   private function inRange($start, $end, $date)
   {
     if ( ! $date instanceof \Carbon\Carbon ) { throw new InvalidArgumentException("The provided date object is not of type 'Carbon\Carbon'"); }
-    if ( ! empty($start) && $start instanceof \Carbon\Carbon && $date->lt($start) ) { return false; }
-    if ( ! empty($end) && $end instanceof \Carbon\Carbon && $date->gt($end) ) { return false; }
+    if ( ! empty($start) && $start instanceof \Carbon\Carbon && $date->format('Y-m-d') < $start->format('Y-m-d') ) { return false; }
+    if ( ! empty($end) && $end instanceof \Carbon\Carbon && $date->format('Y-m-d') > $end->format('Y-m-d') ) { return false; }
     return true;
   }
 

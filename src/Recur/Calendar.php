@@ -53,7 +53,10 @@ class Calendar {
       $newList = [];
 
       foreach ( $list as $unit => $v ) {
-        if( is_string($unit) ) {
+        if( is_string($unit) && static::$unitTypes[$nameType] == 'month' ) {
+          $unit = Carbon::parse($unit . " 1")->{ static::$unitTypes[$nameType] };
+        }
+        elseif( is_string($unit) ) {
           $unit = Carbon::parse($unit)->{ static::$unitTypes[$nameType] };
         }
         $newList[$unit] = $v;

@@ -14,6 +14,15 @@ use Recur\Recur;
 
 class CalendarTest extends BaseTest
 {
+  public function testWeekDays()
+  {
+    $recur = Recur::create()->every([ 'mon', 'tue', 'wed', 'thu', 'fri' ], 'daysOfWeek' );
+    $this->assertTrue($recur->matches(new Carbon("Mon")));
+    $this->assertTrue($recur->matches(new Carbon("Mon +1 day")));
+    $this->assertTrue($recur->matches(new Carbon("Mon +7 day")));
+    $this->assertFalse($recur->matches(new Carbon("Sunday")));
+  }
+
   public function testDoNotMatchBeforeStart()
   {
     $start = Carbon::now();
