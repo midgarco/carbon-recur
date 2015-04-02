@@ -266,6 +266,12 @@ class Recur {
       $data['end'] = static::$end->toDateString();
     }
 
+    if ( static::$from && static::$from instanceof \Carbon\Carbon ) {
+      $data['from'] = static::$from->toDateString();
+    }
+
+    $data['timezone'] = static::$tz;
+
     $data['exceptions'] = [];
     foreach ( static::$exceptions as $exception ) {
       if ( ! $exception instanceof \Carbon\Carbon ) {
