@@ -48,21 +48,22 @@ class Calendar {
   }
 
   // Private function to convert day and month names to numbers
-  static function namesToNumbers($list, $nameType) {
-      // var unit, unitInt, unitNum;
-      $newList = [];
+  static function namesToNumbers($list, $nameType)
+  {
+    // var unit, unitInt, unitNum;
+    $newList = [];
 
-      foreach ( $list as $unit => $v ) {
-        if( is_string($unit) && static::$unitTypes[$nameType] == 'month' ) {
-          $unit = Carbon::parse($unit . " 1")->{ static::$unitTypes[$nameType] };
-        }
-        elseif( is_string($unit) ) {
-          $unit = Carbon::parse($unit)->{ static::$unitTypes[$nameType] };
-        }
-        $newList[$unit] = $v;
+    foreach ( $list as $unit => $v ) {
+      if( is_string($unit) && static::$unitTypes[$nameType] == 'month' ) {
+        $unit = Carbon::parse($unit . " 1")->{ static::$unitTypes[$nameType] };
       }
+      elseif( is_string($unit) ) {
+        $unit = Carbon::parse($unit)->{ static::$unitTypes[$nameType] };
+      }
+      $newList[$unit] = $v;
+    }
 
-      return $newList;
+    return $newList;
   }
 
   static function create($list, $measure)
