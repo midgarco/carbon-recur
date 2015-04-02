@@ -83,6 +83,7 @@ class Recur {
     if ( $tz ) {
       static::$tz = $tz;
     }
+    static::$tz = ( ! empty($options['timezone']) ) ? $options['timezone'] : static::$tz;
 
     // Setup the start date
     if ( ! empty($options["start"]) ) {
