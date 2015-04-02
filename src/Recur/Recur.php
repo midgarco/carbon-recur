@@ -215,6 +215,13 @@ class Recur {
   //   }
   // }
 
+  public function setTimezone($value)
+  {
+    static::$tz = $value;
+
+    return $this;
+  }
+
   public function start($value)
   {
     static::$start = Carbon::parse($value, static::$tz);
