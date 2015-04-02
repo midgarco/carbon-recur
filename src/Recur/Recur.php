@@ -219,6 +219,17 @@ class Recur {
   {
     static::$tz = $value;
 
+    // update set dates
+    if ( static::$start && static::$start instanceof \Carbon\Carbon ) {
+      static::$start->timezone = static::$tz;
+    }
+    if ( static::$end && static::$end instanceof \Carbon\Carbon ) {
+      static::$end->timezone = static::$tz;
+    }
+    if ( static::$from && static::$from instanceof \Carbon\Carbon ) {
+      static::$from->timezone = static::$tz;
+    }
+
     return $this;
   }
 
