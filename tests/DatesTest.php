@@ -99,4 +99,26 @@ class DatesTest extends BaseTest
     $this->assertEquals(count($allDates), 1);
     $this->assertEquals($allDates[0], "01/01/2014");
   }
+
+  public function testStartBeforeFromDate()
+  {
+    $config = [
+      'start' => '2015-04-23',
+      'from' => '2015-04-12',
+      'rules' => [
+        'years' => [
+          'measure' => 'years',
+          'units' => [
+            1 => true
+          ]
+        ]
+      ]
+    ];
+
+    $recur = Recur::create($config);
+    $nextDates = $recur->next(3);
+    $this->assertEquals(count($nextDates), 3);
+    $this->assertEquals($nextDates[0], "2016-04-23");
+    $this->assertEquals($nextDates[1], "2017-04-23");
+  }
 }

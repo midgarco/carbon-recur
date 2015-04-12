@@ -508,19 +508,19 @@ class Recur {
   }
 
   // Get next N occurances
-  public function next( $num, $format )
+  public function next( $num, $format = 'Y-m-d' )
   {
     return $this->getOccurances( $num, $format, "next" );
   }
 
   // Get previous N occurances
-  public function previous( $num, $format )
+  public function previous( $num, $format = 'Y-m-d' )
   {
     return $this->getOccurances( $num, $format, "previous" );
   }
 
   // Get all occurances between start and end date
-  public function all( $format )
+  public function all( $format = 'Y-m-d' )
   {
     return $this->getOccurances( null, $format, "all" );
   }
