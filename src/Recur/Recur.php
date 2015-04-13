@@ -91,10 +91,10 @@ class Recur {
     }
     // If the start date is not provided then assume today
     if ( empty($start) ) {
-      $start = Carbon::now(static::$tz);
+      $start = Carbon::now(static::$tz)->hour(0)->minute(0)->second(0);
     }
     if ( ! $start instanceof \Carbon\Carbon ) {
-      $start = Carbon::parse($start, static::$tz);
+      $start = Carbon::parse($start, static::$tz)->hour(0)->minute(0)->second(0);
     }
     static::$start = $start;
 
@@ -103,7 +103,7 @@ class Recur {
       $end = $options["end"];
     }
     if ( ! empty($end) ) {
-      $end = Carbon::parse($end, static::$tz);
+      $end = Carbon::parse($end, static::$tz)->hour(0)->minute(0)->second(0);
       static::$end = $end;
     }
 
@@ -236,21 +236,21 @@ class Recur {
 
   public function start($value)
   {
-    static::$start = Carbon::parse($value, static::$tz);
+    static::$start = Carbon::parse($value, static::$tz)->hour(0)->minute(0)->second(0);
 
     return $this;
   }
 
   public function end($value)
   {
-    static::$end = Carbon::parse($value, static::$tz);
+    static::$end = Carbon::parse($value, static::$tz)->hour(0)->minute(0)->second(0);
 
     return $this;
   }
 
   public function from($value)
   {
-    static::$from = Carbon::parse($value, static::$tz);
+    static::$from = Carbon::parse($value, static::$tz)->hour(0)->minute(0)->second(0);
 
     return $this;
   }
