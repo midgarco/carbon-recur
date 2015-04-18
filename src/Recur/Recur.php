@@ -98,6 +98,16 @@ class Recur {
     }
     static::$start = $start;
 
+    // Setup the from date
+    if ( ! empty($options["from"]) ) {
+      $from = $options["from"];
+
+      if ( ! $from instanceof \Carbon\Carbon ) {
+        $from = Carbon::parse($from, static::$tz)->hour(0)->minute(0)->second(0);
+      }
+      static::$from = $from;
+    }
+
     // Setup the end date
     if ( ! empty($options["end"]) ) {
       $end = $options["end"];
@@ -200,7 +210,7 @@ class Recur {
 
       case 'timezone':
       case 'tz':
-        $this->setTimezone($value);
+        $this->timezone($value);
         break;
 
       default:
@@ -216,7 +226,7 @@ class Recur {
   //   }
   // }
 
-  public function setTimezone($value)
+  public function timezone($value)
   {
     static::$tz = $value;
 
@@ -493,6 +503,11 @@ class Recur {
       }
 
       $rule = Interval::create(static::$units, static::$measure);
+
+      // weekly defaults to Sunday, so add a rule to set the day of the week if there is not already a rule
+      if( static::$measure == 'weeks' && empty(static::$rules['daysOfWeek']) ) {
+        $this->every(static::$start->dayOfWeek, 'daysOfWeek');
+      }
     }
 
     if ( $ruleType === "calendar" ) {
@@ -558,6 +573,7 @@ class Recur {
     }
 
     // Get the next N dates, if num is null then infinite
+    $count = 0;
     while ( count($dates) < ( ! $num ? count($dates) + 1 : $num) ) {
       if ( $type === "next" || $type === "all" ) {
         $currentDate->addDay();

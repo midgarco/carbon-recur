@@ -118,21 +118,28 @@ class DatesTest extends BaseTest
     $recur = Recur::create($config);
     $nextDates = $recur->next(3);
     $this->assertEquals(count($nextDates), 3);
-    $this->assertEquals($nextDates[0], "2016-04-23");
-    $this->assertEquals($nextDates[1], "2017-04-23");
+    $this->assertEquals($nextDates[0], "2015-04-23");
+    $this->assertEquals($nextDates[1], "2016-04-23");
   }
 
   public function testWeekStartFromError()
   {
     $config = [
       'start' => '2015-04-02',
-      'from'  => '2015-04-12 19:05:21.000000',
+      'from' => '2015-04-19',
       'timezone' => 'America/Phoenix',
+      'exceptions' => [],
       'rules' => [
-        'years' => [
+        'daysOfWeek' => [
+          'measure' => 'daysOfWeek',
+          'units' => [
+            '4' => 1,
+          ]
+        ],
+        'weeks' => [
           'measure' => 'weeks',
-          'units'   => [
-            2 => true
+          'units' => [
+            '2' => 1,
           ]
         ]
       ]
@@ -141,7 +148,7 @@ class DatesTest extends BaseTest
     $recur = Recur::create($config);
     $nextDates = $recur->next(3);
     $this->assertEquals(count($nextDates), 3);
-    $this->assertEquals($nextDates[0], "2015-04-16");
-    $this->assertEquals($nextDates[1], "2015-04-30");
+    $this->assertEquals($nextDates[0], "2015-04-30");
+    $this->assertEquals($nextDates[1], "2015-05-14");
   }
 }
