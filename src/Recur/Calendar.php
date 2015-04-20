@@ -99,17 +99,17 @@ class Calendar {
       $unit--;
     }
 
-    // var_dump([ $unitType, $list, $date, $date->format('W'), $unit ]);
+    // print_r([ $unitType, $list, $date, $date->dayOfWeek, $date->format('W'), $unit ]);
 
     // If the unit is in our list, return true, else return false
-    if ( in_array($unit, array_keys($list)) ) {
+    if( in_array($unit, array_keys($list)) ) {
       return true;
     }
 
     // match on end of month days
-    if ( $unitType === 'day' && $unit == $date->addMonth(1)->day(0)->day && $unit < 31) {
+    if( $unitType === 'day' && $unit == $date->copy()->addMonth(1)->day(0)->day && $unit < 31) {
       while ( $unit <= 31 ) {
-        if ( $list[$unit] ) {
+        if ( ! empty($list[$unit]) ) {
           return true;
         }
         $unit++;

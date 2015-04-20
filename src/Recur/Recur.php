@@ -393,7 +393,7 @@ class Recur {
       $type = static::$ruleTypes[$rule['measure']];
 
       if ( $type === "interval" ) {
-        if ( ! Interval::match($rule['measure'], $rule['units'], $start, $date) ) {
+        if ( ! Interval::match($rule['measure'], $rule['units'], $start, $date, count($rules) > 1) ) {
           return false;
         }
       }
@@ -504,10 +504,10 @@ class Recur {
 
       $rule = Interval::create(static::$units, static::$measure);
 
-      // weekly defaults to Sunday, so add a rule to set the day of the week if there is not already a rule
-      if( static::$measure == 'weeks' && empty(static::$rules['daysOfWeek']) ) {
-        $this->every(static::$start->dayOfWeek, 'daysOfWeek');
-      }
+      // // weekly defaults to Sunday, so add a rule to set the day of the week if there is not already a rule
+      // if( static::$measure == 'weeks' && empty(static::$rules['daysOfWeek']) ) {
+      //   $this->every(static::$start->dayOfWeek, 'daysOfWeek');
+      // }
     }
 
     if ( $ruleType === "calendar" ) {
@@ -573,7 +573,6 @@ class Recur {
     }
 
     // Get the next N dates, if num is null then infinite
-    $count = 0;
     while ( count($dates) < ( ! $num ? count($dates) + 1 : $num) ) {
       if ( $type === "next" || $type === "all" ) {
         $currentDate->addDay();
