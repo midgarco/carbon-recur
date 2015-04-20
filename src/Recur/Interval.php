@@ -15,23 +15,23 @@ use InvalidArgumentException;
 
 class Interval {
 
-  private function diffInDays($d1, $d2, $abs) {
+  static function diffInDays($d1, $d2, $abs) {
     return self::diff($d1, $d2, 'day', $abs);
   }
 
-  private function diffInWeeks($d1, $d2, $abs) {
+  static function diffInWeeks($d1, $d2, $abs) {
     return self::diff($d1, $d2, 'week', $abs);
   }
 
-  private function diffInMonths($d1, $d2, $abs) {
+  static function diffInMonths($d1, $d2, $abs) {
     return self::diff($d1, $d2, 'month', $abs);
   }
 
-  private function diffInYears($d1, $d2, $abs) {
+  static function diffInYears($d1, $d2, $abs) {
     return self::diff($d1, $d2, 'year', $abs);
   }
 
-  private function diff($d1, $d2, $type = '', $absValue = false)
+  static function diff($d1, $d2, $type = '', $absValue = false)
   {
     $zoneDelta = ($d2->offset * 1000 - $d1->offset * 1000) * 6e4;
     $delta = 0;
@@ -53,7 +53,7 @@ class Interval {
     return $absValue ? self::absFloor($output) : $output;
   }
 
-  private function calcDiff($type, $delta, $zoneDelta)
+  static function calcDiff($type, $delta, $zoneDelta)
   {
     switch( $type ) {
       case 'second':
@@ -71,7 +71,7 @@ class Interval {
     }
   }
 
-  private function absFloor($number)
+  static function absFloor($number)
   {
     if ($number < 0) {
       return ceil($number);
@@ -80,7 +80,7 @@ class Interval {
     }
   }
 
-  private function monthDiff($a, $b)
+  static function monthDiff($a, $b)
   {
     // difference in months
     $wholeMonthDiff = (($b->year - $a->year) * 12) + ($b->month - $a->month);
